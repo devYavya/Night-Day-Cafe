@@ -129,7 +129,7 @@ const Menu = () => {
         orderType: "dine-in",
       };
 
-      const response = await apiService.placeOrder(orderData);
+      await apiService.placeOrder(orderData);
       setCart([]);
       navigate("/CheckoutPage", { state: { cart } });
     } catch (error) {
