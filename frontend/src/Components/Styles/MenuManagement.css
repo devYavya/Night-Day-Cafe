@@ -1,0 +1,231 @@
+.admin-menu-page {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+/* Wrapper layout */
+.main-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Side Navigation */
+.sidenav-container {
+    width: 250px;
+    background-color: #f5f5f5;
+    /* Or match your sidenav background */
+    border-right: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.content-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.admin-menu-page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.content-container h1,
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.toggle-form-btn {
+    display: block;
+    margin: 0 auto 2rem auto;
+    background-color: #007bff;
+    color: white;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.toggle-form-btn:hover {
+    background-color: #0056b3;
+}
+
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.menu-item {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.menu-item:hover {
+    transform: scale(1.02);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.item-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.item-header .price {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.menu-item p {
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.menu-item small {
+    display: block;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+.item-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Form Container */
+.menu-form-wrapper {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.menu-form-wrapper.show {
+    display: block;
+}
+
+.menu-form {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.menu-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.menu-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.menu-form input[type="text"],
+.menu-form input[type="number"],
+.menu-form textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.2s ease;
+}
+
+.menu-form input:focus,
+.menu-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.menu-form input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+}
+
+.save-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .menu-form,
+    .menu-item {
+        padding: 1rem;
+    }
+
+    .menu-items {
+        grid-template-columns: 1fr;
+    }
+}

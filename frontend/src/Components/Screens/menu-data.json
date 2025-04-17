@@ -1,0 +1,623 @@
+{
+  "coffee": [
+    {
+      "name": "Cold Coffee (medium)",
+      "price": 50
+    },
+    {
+      "name": "Cold Coffee (large)",
+      "price": 70
+    },
+    {
+      "name": "Cold Coffee With Ice Cream And Coco Chips",
+      "price": 90
+    },
+    {
+      "name": "Hot Coffee",
+      "price": 40
+    },
+    {
+      "name": "Hazelnut Cold Coffee",
+      "price": 70
+    },
+    {
+      "name": "Hazelnut Hot Coffee",
+      "price": 50
+    }
+  ],
+  "burgers": [
+    {
+      "name": "Aloo Tikki Burger",
+      "price": 50
+    },
+    {
+      "name": "Cheese Burger",
+      "price": 80
+    },
+    {
+      "name": "Double Aloo Tikki Burger",
+      "price": 90
+    },
+    {
+      "name": "Paneer Cheese Burger",
+      "price": 99
+    },
+    {
+      "name": "Crunchy Burger",
+      "price": 99
+    },
+    {
+      "name": "Veggie Delight Burger",
+      "price": 150
+    },
+    {
+      "name": "Egg Burger",
+      "price": 80
+    },
+    {
+      "name": "Egg & Cheese Burger",
+      "price": 99
+    }
+  ],
+  "drinks": [
+    {
+      "name": "Fresh Lime Soda",
+      "price": 60
+    },
+    {
+      "name": "Lemonade",
+      "price": 50
+    },
+    {
+      "name": "Masala Cold drink",
+      "price": 99
+    },
+    {
+      "name": "Lemon Iced Tea",
+      "price": 70
+    }
+  ],
+  "desserts": [
+    {
+      "name": "Vanilla Bowl",
+      "price": 50
+    },
+    {
+      "name": "Chocolate Bowl",
+      "price": 50
+    },
+    {
+      "name": "Strawberry Bowl",
+      "price": 50
+    },
+    {
+      "name": "Choco - Vanilla Bowl",
+      "price": 60
+    },
+    {
+      "name": "Mix Ice Cream Bowl",
+      "price": 60
+    },
+    {
+      "name": "Brownie With Ice Cream",
+      "price": 80
+    },
+    {
+      "name": "Vanilla Pastry",
+      "price": 45
+    },
+    {
+      "name": "Chocolate Pastry",
+      "price": 55
+    },
+    {
+      "name": "Dark Forest Pastry",
+      "price": 65
+    }
+  ],
+  "tea": [
+    {
+      "name": "Green Tea",
+      "price": 30
+    },
+    {
+      "name": "Kulhad Chai",
+      "price": 20
+    },
+    {
+      "name": "Gud Tea",
+      "price": 15
+    },
+    {
+      "name": "Lemon Tea",
+      "price": 40
+    },
+    {
+      "name": "Lemon Iced Tea",
+      "price": 99
+    },
+    {
+      "name": "Iced Tea Soda",
+      "price": 99
+    },
+    {
+      "name": "Hot Chocolate",
+      "price": 50
+    },
+    {
+      "name": "Hot Milk Chocolate",
+      "price": 60
+    },
+    {
+      "name": "Hot Milk (Kesar)",
+      "price": 80
+    }
+  ],
+  "sandwiches": [
+    {
+      "name": "Veg Sandwich",
+      "price": 60
+    },
+    {
+      "name": "Veg Cheese Sandwich",
+      "price": 80
+    },
+    {
+      "name": "Paneer Tikka Sandwich",
+      "price": 110
+    },
+    {
+      "name": "Sweet Corn Sandwich",
+      "price": 70
+    },
+    {
+      "name": "Sweet Corn Cheese Sandwich",
+      "price": 90
+    },
+    {
+      "name": "Bombay Sandwich",
+      "price": 110
+    },
+    {
+      "name": "Paneer Sandwich",
+      "price": 99
+    },
+    {
+      "name": "Club Sandwich (3 Layer)",
+      "price": 120
+    },
+    {
+      "name": "Mushroom Sandwich",
+      "price": 130
+    },
+    {
+      "name": "Egg Sandwich",
+      "price": 99
+    },
+    {
+      "name": "Egg Cheese Sandwich",
+      "price": 120
+    }
+  ],
+  "starters": [
+    {
+      "name": "Chilli Potato",
+      "price": 99
+    },
+    {
+      "name": "Honey Chilli Potato",
+      "price": 120
+    },
+    {
+      "name": "Chilli Paneer Dry / Gravy",
+      "price": 150
+    },
+    {
+      "name": "Chilli Mushroom",
+      "price": 140
+    },
+    {
+      "name": "Manchurian Dry / Gravy",
+      "price": 90
+    },
+    {
+      "name": "Manchurian with Fried Rice",
+      "price": 180
+    },
+    {
+      "name": "Crispy Corn",
+      "price": 99
+    },
+    {
+      "name": "Veg Nuggets ( 10 PCS )",
+      "price": 80
+    },
+    {
+      "name": "Chilli Chunks",
+      "price": 90
+    },
+    {
+      "name": "Salted Salad",
+      "price": 60
+    },
+    {
+      "name": "Paneer Mushroom Salad",
+      "price": 120
+    }
+  ],
+  "noodles": [
+    {
+      "name": "Veg Noodles",
+      "price": 70
+    },
+    {
+      "name": "Hakka Noodles",
+      "price": 80
+    },
+    {
+      "name": "Paneer Noodles",
+      "price": 120
+    },
+    {
+      "name": "Schezwan Noodles",
+      "price": 80
+    },
+    {
+      "name": "American Chopsi",
+      "price": 110
+    },
+    {
+      "name": "Chines Bhel",
+      "price": 90
+    },
+    {
+      "name": "Mushroom Noodles",
+      "price": 99
+    },
+    {
+      "name": "Egg Noddles",
+      "price": 99
+    }
+  ],
+  "momos": [
+    {
+      "name": "Stem Momos",
+      "price": 50
+    },
+    {
+      "name": "Fried Momos",
+      "price": 70
+    },
+    {
+      "name": "Kurkure Momos",
+      "price": 99
+    },
+    {
+      "name": "Cheese Loaded Momos",
+      "price": 130
+    },
+    {
+      "name": "Momos With Noodles",
+      "price": 90
+    },
+    {
+      "name": "Chilli Momos",
+      "price": 99
+    },
+    {
+      "name": "Corn & cheese Stem Momo",
+      "price": 110
+    },
+    {
+      "name": "Corn & cheese Fried Momo",
+      "price": 130
+    },
+    {
+      "name": "Paneer Stem Momo",
+      "price": 130
+    },
+    {
+      "name": "Paneer Fried Momo",
+      "price": 150
+    }
+  ],
+  "chaat": [
+    {
+      "name": "Veggie Nachos",
+      "price": 80
+    },
+    {
+      "name": "Cheesy Nachos",
+      "price": 150
+    },
+    {
+              "name": "Veggie Kurkure",
+              "price": 70
+            }
+          ],
+          "rolls": [
+            {
+              "name": "Veg Roll",
+              "price": 80
+            },
+            {
+              "name": "Paneer Roll",
+              "price": 120
+            },
+            {
+              "name": "Spring Roll",
+              "price": 99
+            },
+            {
+              "name": "Paneer Cheese Roll",
+              "price": 150
+            },
+            {
+              "name": "Double Egg Roll",
+              "price": 99
+            }
+          ],
+          "mojito": [
+            {
+              "name": "Virgin Mojito",
+              "price": 99
+            },
+            {
+              "name": "Watermelon Mojito",
+              "price": 99
+            },
+            {
+              "name": "Blue Lagoon Mojito",
+              "price": 99
+            },
+            {
+              "name": "Hazelnut Mojito",
+              "price": 99
+            },
+            {
+              "name": "Spicy Mango Mojito",
+              "price": 99
+            },
+            {
+              "name": "Orange Mojito",
+              "price": 99
+            },
+            {
+              "name": "Green Apple Mojito",
+              "price": 99
+            },
+            {
+              "name": "Vanilla Mojito",
+              "price": 99
+            }
+          ],
+          "shakes": [
+            {
+              "name": "Vanilla Shake",
+              "price": 99
+            },
+            {
+              "name": "Butterscotch Shake",
+              "price": 99
+            },
+            {
+              "name": "Strawberry Shake",
+              "price": 99
+            },
+            {
+              "name": "Chocolate Shake",
+              "price": 110
+            },
+            {
+              "name": "Kiwi Shake",
+              "price": 120
+            },
+            {
+              "name": "Kitkat Shake",
+              "price": 130
+            },
+            {
+              "name": "Oreo Shake",
+              "price": 120
+            },
+            {
+              "name": "Nutella Shake",
+              "price": 150
+            },
+            {
+              "name": "Brownie Shake",
+              "price": 120
+            },
+            {
+              "name": "Banana Shake",
+              "price": 100
+            },
+            {
+              "name": "Biscof Shake",
+              "price": 180
+            }
+          ],
+          "rice": [
+            {
+              "name": "Fried Rice",
+              "price": 120
+            },
+            {
+              "name": "Schezwan Fried Rice",
+              "price": 130
+            },
+            {
+              "name": "Corn Fried Rice",
+              "price": 140
+            },
+            {
+              "name": "Paneer Fried Rice",
+              "price": 160
+            },
+            {
+              "name": "Mushroom Fried Rice",
+              "price": 160
+            },
+            {
+              "name": "Egg Fried Rice",
+              "price": 150
+            }
+          ],
+          "fries": [
+            {
+              "name": "Masala Fries",
+              "price": 80
+            },
+            {
+              "name": "Peri Peri Fries",
+              "price": 90
+            },
+            {
+              "name": "Cheesy Loaded Fries",
+              "price": 180
+            }
+          ],
+          "maggie": [
+            {
+              "name": "Masala Maggie",
+              "price": 50
+            },
+            {
+              "name": "Cheese Maggie",
+              "price": 70
+            },
+            {
+              "name": "Paneer Maggie",
+              "price": 80
+            },
+            {
+              "name": "Schezwan Maggie",
+              "price": 70
+            }
+          ],
+          "pizza": [
+            {
+              "name": "Onion Pizza",
+              "price": 99
+            },
+            {
+              "name": "Capsicum Pizza",
+              "price": 99
+            },
+            {
+              "name": "Tomato Pizza",
+              "price": 110
+            },
+            {
+              "name": "Corn & Cheese Pizza",
+              "price": 130
+            },
+            {
+              "name": "Paneer Pizza",
+              "price": 150
+            },
+            {
+              "name": "OTC Pizza",
+              "price": 150
+            },
+            {
+              "name": "Mushroom Tomato Pizza",
+              "price": 150
+            },
+            {
+              "name": "Margherita Pizza",
+              "price": 150
+            },
+            {
+              "name": "Tandoori Paneer Pizza",
+              "price": 200
+            },
+            {
+              "name": "Veg Delight Pizza",
+              "price": 220
+            },
+            {
+              "name": "Veg Paradise Pizza",
+              "price": 250
+            },
+            {
+              "name": "Night & Day Special Pizza",
+              "price": 270
+            }
+          ],
+          "eggcourse": [
+            {
+              "name": "Boil Egg (1 PCS)",
+              "price": 15
+            },
+            {
+              "name": "Fried Egg (1 PCS)",
+              "price": 20
+            },
+            {
+              "name": "Half Fry",
+              "price": 80
+            },
+            {
+              "name": "Masala Omelette",
+              "price": 70
+            },
+            {
+              "name": "Cheese Omelette",
+              "price": 99
+            },
+            {
+              "name": "Egg Bhurji",
+              "price": 50
+            },
+            {
+              "name": "Egg Ghosla",
+              "price": 150
+            }
+          ],
+          "sizzlers": [
+            {
+              "name": "Viatnami sizzle",
+              "price": 199,
+              "description": "(Hakka Noodles + Dry Manchurian + Masala Fries)"
+            },
+            {
+              "name": "Paneer Delight",
+              "price": 399,
+              "description": "(Paneer Fried Rice + Chilli Paneer + Veg Nuggets + Peri Peri Fries)"
+            },
+            {
+              "name": "Spicy Crispy Delight",
+              "price": 199,
+              "description": "(Chilli Potato + Fried Momos + Spring Roll)"
+            },
+            {
+              "name": "Sizzling Brownie",
+              "price": 110,
+              "description": "(Brownie + Ice Cream)"
+            }
+          ],
+          "combos": [
+            {
+              "name": "Manchurian With Gravy + Fried Rice",
+              "price": 149
+            },
+            {
+              "name": "Mojito/cold Coffee + peri peri Fries + Margherita Pizza",
+              "price": 249
+            },
+            {
+              "name": "Hot Coffee + Butter Bread",
+              "price": 69
+            },
+            {
+              "name": "Cold Coffee/Mojito + 2 paneer Cheese Burger",
+              "price": 279
+            },
+            {
+              "name": "Night & Day Special Combo",
+              "price": 599,
+              "description": "(Mushroom Noodles + Pink Pasta + Cheese Sandwich + Cheese Burger + Brownie With Ice Cream + Spring Roll + 2 Mojito/Cold Coffee + Paneer Fried Momos + Salted Salad)"
+            }
+          ]
+}
