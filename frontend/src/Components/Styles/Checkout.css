@@ -1,65 +1,136 @@
-.checkout-container {
+.checkout-page {
     max-width: 600px;
-    margin: auto;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff9f5;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    box-sizing: border-box;
 }
 
-.checkout-title {
-    font-size: 24px;
-    font-weight: bold;
+.checkout-page h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    font-size: 2rem;
+    color: #d35400;
 }
 
-.checkout-card {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.checkout-page label {
+    display: block;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #444;
 }
 
-.section-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.order-item {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
-.total-price {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.checkout-button {
+.checkout-page input {
     width: 100%;
     padding: 12px;
-    background: #28a745;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
-.checkout-button:hover {
-    background: #218838;
+.checkout-page input:focus {
+    border-color: #d35400;
+    outline: none;
+}
+
+.checkout-page ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.checkout-page li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1.1rem;
+}
+
+.checkout-page p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.checkout-page button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #d35400;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-page button:hover {
+    background-color: #e67e22;
+}
+
+.checkout-page button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-page {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .checkout-page h1 {
+        font-size: 1.6rem;
+    }
+
+    .checkout-page input {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .checkout-page li {
+        font-size: 1rem;
+    }
+
+    .checkout-page p {
+        font-size: 1.1rem;
+    }
+
+    .checkout-page button {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-page {
+        margin: 10px;
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .checkout-page h1 {
+        font-size: 1.4rem;
+    }
+
+    .checkout-page input {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .checkout-page button {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
 }

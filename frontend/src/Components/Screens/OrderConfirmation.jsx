@@ -1,22 +1,29 @@
-import React from 'react';
-import '../Styles/OrderConfirmation.css';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../Styles/OrderConfirmation.css";
 
-const OrderConfirmation = ({ orderDetails, onClose }) => {
+const OrderConfirmation = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const customerName = state?.customerName || "Customer";
+  const totalAmount = state?.totalAmount || 0;
+  const orderTime = state?.orderTime || new Date().toLocaleString();
+
   return (
     <div className="order-confirmation">
-      <h2>Order Confirmation</h2>
-      <p>Thank you for your order!</p>
-      <h3>Order Details:</h3>
-      <ul>
-        {orderDetails.items.map((item, index) => (
-          <li key={index}>
-            {item.name} - ₹{item.price} x {item.quantity}
-          </li>
-        ))}
-      </ul>
-      <p>Total Amount: ₹{orderDetails.totalAmount}</p>
-      <p>Order Date: {new Date(orderDetails.orderDate).toLocaleString()}</p>
-      <button onClick={onClose}>Close</button>
+      <h1>🎉 Order Confirmed!</h1>
+      <p>
+        Thank you, <strong>{customerName}</strong>!
+      </p>
+      <p>Your order has been placed successfully.</p>
+      <p>
+        <strong>Total:</strong> ₹{totalAmount}
+      </p>
+      <p>
+        <strong>Time:</strong> {orderTime}
+      </p>
+      <button onClick={() => navigate("/")}>Return to Home</button>
     </div>
   );
 };

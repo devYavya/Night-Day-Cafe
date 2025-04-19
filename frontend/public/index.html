@@ -7,36 +7,45 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Night & Day Cafe - Enjoy the best coffee and meals any time of the day. Cozy atmosphere and quality service."
     />
+    <meta name="keywords" content="Cafe, Coffee, Night & Day, Meals, Restaurant, Cozy, Quality Service" />
+    <meta name="author" content="Night & Day Cafe" />
+    <meta property="og:title" content="Night & Day Cafe" />
+    <meta property="og:description" content="Enjoy the best coffee and meals any time of the day at Night & Day Cafe." />
+    <meta property="og:image" content="%PUBLIC_URL%/logo.png" />
+    <meta property="og:url" content="https://night-day-cafe.example.com" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Night & Day Cafe" />
+    <meta name="twitter:description" content="Enjoy the best coffee and meals any time of the day at Night & Day Cafe." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo.png" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    --> 
     <title>Night & Day | Any-Thing Any-Time</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "name": "Night & Day Cafe",
+        "image": "%PUBLIC_URL%/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "khatipura railway station",
+          "addressLocality": "jaipur",
+          "addressRegion": "rajasthan",
+          "postalCode": "302012",
+          "addressCountry": "India"
+        },
+        "telephone": "+1-555-555-5555",
+        "url": "https://night-day-cafe-face.onrender.com/",
+        "sameAs": [
+          "https://www.instagram.com/night.and.day_001?igsh=MWNxaW5mNG4zeGtyeQ=="
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

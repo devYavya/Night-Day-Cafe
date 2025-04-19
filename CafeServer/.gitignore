@@ -92,7 +92,6 @@ appsettings.*.json
 
 # Docker
 **/*.pid
-Dockerfile
 docker-compose*
 
 # JetBrains Rider

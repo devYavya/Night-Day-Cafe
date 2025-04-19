@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        builder => builder.WithOrigins("http://localhost:3000")
+        builder => builder.WithOrigins("https://night-day-cafe-face.onrender.com")
                          .AllowAnyMethod()
                          .AllowAnyHeader());
 });

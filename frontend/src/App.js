@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import Preloader from "./Components/Screens/Preloader";
 import "./App.css";
@@ -23,6 +24,7 @@ import { apiService } from "./services/apiService";
 
 const AppWithRouter = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -59,7 +61,7 @@ const AppWithRouter = () => {
 
   return (
     <>
-      <Preloader />
+      {location.pathname === "/" && <Preloader />}
       <Routes>
         {/* Customer Routes */}
         <Route path="/" element={<Homepage />} />

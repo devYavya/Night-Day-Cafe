@@ -5,6 +5,14 @@
     height: 100vh;
     background-color: #ffffff;
     transition: opacity 0.5s ease;
+    position: fixed;
+    /* Make sure it's fixed on the screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    /* Ensure it's above other content */
 }
 
 .preloader__content {
@@ -25,5 +33,11 @@
 
     50% {
         opacity: 0.5;
+    }
+}
+
+@media (max-width: 768px) {
+    .preloader__logo {
+        width: 80px;
     }
 }
