@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,8 +44,29 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("AllowFrontend");
+
+// Serve static files from frontend build directory
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "..", "frontend", "build")),
+    RequestPath = ""
+});
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "..", "frontend", "build")),
+    RequestPath = ""
+});
+
 app.UseAuthorization();
 app.MapControllers();
+
+app.MapFallbackToFile("index.html", new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "..", "frontend", "build"))
+});
 
 using (var scope = app.Services.CreateScope())
 {
@@ -66,7 +88,7 @@ static async Task LoadMenuData(MenuRepository menuRepo)
         if (menuItems != null && !await menuRepo.HasData())
         {
             await menuRepo.AddMultipleMenuItems(menuItems);
-            Console.WriteLine("Menu items loaded from JSON file into MongoDB.");
+            // Console.WriteLine("Menu items loaded from JSON file into MongoDB.");
         }
     }
 }
