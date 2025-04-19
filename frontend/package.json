@@ -6,6 +6,7 @@
     "@shadcn/ui": "^0.0.4",
     "axios": "^1.8.4",
     "components": "^0.1.0",
+    "cors": "^2.8.5",
     "cra-template": "1.2.0",
     "gsap": "^3.12.5",
     "motion": "^12.5.0",
