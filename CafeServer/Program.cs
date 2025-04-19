@@ -62,7 +62,6 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseAuthorization();
 app.MapControllers();
 
-// SPA fallback to serve index.html for unknown routes
 app.MapFallbackToFile("index.html", new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
