@@ -63,6 +63,7 @@ const AppWithRouter = () => {
     <>
       {location.pathname === "/" && <Preloader />}
       <Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
         {/* Customer Routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="/menu" element={<Menu />} />
