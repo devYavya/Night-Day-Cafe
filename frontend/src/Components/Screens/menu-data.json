@@ -578,8 +578,11 @@
           "sizzlers": [
             {
               "name": "Viatnami sizzle",
+              "description": "(Hakka Noodles + Dry Manchurian + Masala Fries)",
+              "category": "sizzlers",
               "price": 199,
-              "description": "(Hakka Noodles + Dry Manchurian + Masala Fries)"
+              "active": true
+
             },
             {
               "name": "Paneer Delight",

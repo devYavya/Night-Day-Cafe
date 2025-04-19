@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
@@ -18,8 +18,8 @@ const MenuItem = memo(({ item, onAddToCart }) => {
   );
 });
 
-const MenuSection = memo(({ title, items, onAddToCart }) => (
-  <section className="menu-section">
+const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
+  <section className="menu-section" ref={sectionRef}>
     <h2>{title}</h2>
     <div className="menu-items">
       {items.map((item, index) => (
@@ -39,6 +39,7 @@ const Menu = () => {
   const [menuData, setMenuData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const sectionRefs = useRef({});
 
   useEffect(() => {
     const fetchMenuData = async () => {
@@ -112,6 +113,13 @@ const Menu = () => {
     navigate("/CheckoutPage", { state: { cart } });
   };
 
+  const scrollToCategory = (category) => {
+    const sectionRef = sectionRefs.current[category];
+    if (sectionRef) {
+      sectionRef.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   if (loading) return <div>Loading menu...</div>;
   if (error) return <div>Error loading menu: {error}</div>;
   if (!menuData) return <div>No menu items available</div>;
@@ -143,6 +151,18 @@ const Menu = () => {
       </button>
       <h1 className="menu-title">Our Menu</h1>
 
+      <div className="category-navigation">
+        {menuSections.map((section) => (
+          <button
+            key={section.title}
+            onClick={() => scrollToCategory(section.title)}
+            className="category-button"
+          >
+            {section.title}
+          </button>
+        ))}
+      </div>
+
       <div className="cart-summary">
         <h3>
           Cart: {cart.reduce((total, item) => total + item.quantity, 0)} items
@@ -166,6 +186,7 @@ const Menu = () => {
           title={section.title}
           items={section.items || []}
           onAddToCart={handleAddToCart}
+          sectionRef={(el) => (sectionRefs.current[section.title] = el)}
         />
       ))}
     </div>
