@@ -1,79 +1,57 @@
-import React, { useState } from "react";
-import "../Styles/Checkout.css";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { apiService } from "../../services/apiService";
 
-const CheckoutPage = ({ cart, placeOrder }) => {
-  const [customer, setCustomer] = useState({ name: "", phone: "" });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+const CheckoutPage = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const cart = state?.cart || [];
 
-  const handleInputChange = (e) => {
-    setCustomer({ ...customer, [e.target.name]: e.target.value });
-  };
-
-  const handlePlaceOrder = async () => {
-    setLoading(true);
-    setError("");
+  const handleConfirmOrder = async () => {
     try {
-      await placeOrder(customer); 
+      const totalAmount = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
+
+      const orderData = {
+        items: cart.map((item) => ({
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          category: item.category,
+        })),
+        totalAmount,
+        orderDate: new Date().toISOString(),
+        status: 0,
+        tableNumber: "Table 1",
+        orderType: "dine-in",
+      };
+
+      await apiService.placeOrder(orderData);
+      alert("Order placed successfully!");
+      navigate("/");
     } catch (err) {
-      setError("Something went wrong while placing the order.");
-    } finally {
-      setLoading(false);
+      console.error("Error placing order:", err);
+      alert("Failed to place order. Please try again.");
     }
   };
 
   return (
-    <div className="checkout-container">
-      <h1 className="checkout-title">Checkout</h1>
-
-      <div className="checkout-card">
-        <h2 className="section-title">Customer Details</h2>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={customer.name}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-        <input
-          type="text"
-          name="phone"
-          placeholder="Phone"
-          value={customer.phone}
-          onChange={handleInputChange}
-          className="input-field"
-        />
-      </div>
-
-      <div className="checkout-card">
-        <h2 className="section-title">Order Summary</h2>
-        {!Array.isArray(cart) || cart.length === 0 ? (
-          <p className="empty-cart">No items in your cart.</p>
-        ) : (
-          cart.map((item, index) => (
-            <p key={item.id || index} className="order-item">
-              {item.name} x {item.quantity} = ₹{item.price * item.quantity || 0}
-            </p>
-          ))
-        )}
-        <p className="total-price">
-          Total: ₹
-          {Array.isArray(cart)
-            ? cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-            : 0}
-        </p>
-      </div>
-
-      {error && <p className="error-message">{error}</p>}
-
-      <button
-        onClick={handlePlaceOrder}
-        className="checkout-button"
-        disabled={loading}
-      >
-        {loading ? "Processing..." : "Place Order"}
-      </button>
+    <div className="checkout-page">
+      <h1>Checkout</h1>
+      <ul>
+        {cart.map((item, index) => (
+          <li key={index}>
+            {item.name} × {item.quantity} — ₹{item.price * item.quantity}
+          </li>
+        ))}
+      </ul>
+      <p>
+        <strong>Total:</strong> ₹
+        {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)}
+      </p>
+      <button onClick={handleConfirmOrder}>Confirm Order</button>
     </div>
   );
 };

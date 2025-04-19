@@ -108,34 +108,8 @@ const Menu = () => {
     navigate("/");
   };
 
-  const handleCheckout = async () => {
-    try {
-      const totalPrice = cart.reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
-      );
-
-      const orderData = {
-        items: cart.map((item) => ({
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          category: item.category,
-        })),
-        totalAmount: totalPrice,
-        orderDate: new Date().toISOString(),
-        status: 0,
-        tableNumber: "Table 1",
-        orderType: "dine-in",
-      };
-
-      await apiService.placeOrder(orderData);
-      setCart([]);
-      navigate("/CheckoutPage", { state: { cart } });
-    } catch (error) {
-      console.error("Order error:", error);
-      alert("Failed to place order. Please try again.");
-    }
+  const handleCheckout = () => {
+    navigate("/CheckoutPage", { state: { cart } });
   };
 
   if (loading) return <div>Loading menu...</div>;
