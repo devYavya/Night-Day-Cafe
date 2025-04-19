@@ -6,6 +6,7 @@
   background: linear-gradient(135deg, #f7f0ff 0%, #e0f7fa 100%);
   min-height: 100vh;
   color: #333;
+  overflow: scroll;
   animation: fadeIn 1s ease-in-out;
 }
 
