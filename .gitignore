@@ -1,0 +1,103 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+*.log
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+Generated\ Files/
+
+# Backup & transient files
+*.bak
+*.tmp
+*.temp
+*.old
+*.swp
+
+# Visual Studio specific
+.vs/
+.vscode/
+.vsconfig
+
+# Rider specific
+.idea/
+
+# ASP.NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Entity Framework
+*.mdf
+*.ldf
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored if package restore is enabled
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# VS Code
+.history/
+*.code-workspace
+
+# DotCover
+.idea/.dotCover
+
+# Azure Pipelines
+.azure-pipelines.yml
+
+# Logs
+*.log
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# StyleCop
+StyleCopReport.xml
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Web projects
+node_modules/
+bower_components/
+wwwroot/lib/
+dist/
+
+# Secrets
+secrets.json
+appsettings.*.json
+
+# Docker
+**/*.pid
+Dockerfile
+docker-compose*
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Mac OS files
+.DS_Store
