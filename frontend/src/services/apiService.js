@@ -1,7 +1,7 @@
 import axios from "axios";
 // import menuData from "../Components/Screens/menu-data.json";
 
-const API_BASE_URL = "http://localhost:5090/api";
+const API_BASE_URL = "https://night-day-cafe.onrender.com/api";
 
 export const apiService = {
   // getMenuItems: async () => {
