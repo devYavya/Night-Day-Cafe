@@ -2,6 +2,7 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
+import LoadingScreen from "./Loadingscreen";
 
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
@@ -41,51 +42,55 @@ const Menu = () => {
   const [error, setError] = useState(null);
   const sectionRefs = useRef({});
 
-  useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const data = await apiService.getMenuItems();
+ useEffect(() => {
+   const fetchMenuData = async () => {
+     try {
+       const data = await apiService.getMenuItems();
 
-        const normalizeItems = (items, category) =>
-          (items || []).map((item) => ({
-            id: item.Id,
-            name: item.Name,
-            price: item.Price,
-            description: item.Description,
-            category: category,
-            active: item.Active,
-          }));
+       const normalizeItems = (items, category) =>
+         (items || []).map((item) => ({
+           id: item.Id,
+           name: item.Name,
+           price: item.Price,
+           description: item.Description,
+           category: category,
+           active: item.Active,
+         }));
 
-        const transformedData = {
-          coffee: normalizeItems(data.coffee, "coffee"),
-          burgers: normalizeItems(data.burgers, "burgers"),
-          drinks: normalizeItems(data.drinks, "drinks"),
-          desserts: normalizeItems(data.desserts, "desserts"),
-          tea: normalizeItems(data.tea, "tea"),
-          sandwiches: normalizeItems(data.sandwiches, "sandwiches"),
-          starters: normalizeItems(data.starters, "starters"),
-          noodles: normalizeItems(data.noodles, "noodles"),
-          momos: normalizeItems(data.momos, "momos"),
-          chaat: normalizeItems(data.chaat, "chaat"),
-          rice: normalizeItems(data.rice, "rice"),
-          fries: normalizeItems(data.fries, "fries"),
-          maggie: normalizeItems(data.maggie, "maggie"),
-          pizza: normalizeItems(data.pizza, "pizza"),
-          eggcourse: normalizeItems(data.eggcourse, "eggcourse"),
-          sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
-          combos: normalizeItems(data.combos, "combos"),
-        };
+       const transformedData = {
+         coffee: normalizeItems(data.coffee, "coffee"),
+         burgers: normalizeItems(data.burgers, "burgers"),
+         drinks: normalizeItems(data.drinks, "drinks"),
+         desserts: normalizeItems(data.desserts, "desserts"),
+         tea: normalizeItems(data.tea, "tea"),
+         sandwiches: normalizeItems(data.sandwiches, "sandwiches"),
+         starters: normalizeItems(data.starters, "starters"),
+         noodles: normalizeItems(data.noodles, "noodles"),
+         momos: normalizeItems(data.momos, "momos"),
+         chaat: normalizeItems(data.chaat, "chaat"),
+         rice: normalizeItems(data.rice, "rice"),
+         fries: normalizeItems(data.fries, "fries"),
+         maggie: normalizeItems(data.maggie, "maggie"),
+         pizza: normalizeItems(data.pizza, "pizza"),
+         eggcourse: normalizeItems(data.eggcourse, "eggcourse"),
+         sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
+         combos: normalizeItems(data.combos, "combos"),
+       };
+       setMenuData(transformedData);
+       setTimeout(() => {
+         setLoading(false);
+       }, 5000);
+     } catch (err) {
+       setError(err.message);
+       setTimeout(() => {
+         setLoading(false);
+       }, 5000);
+     }
+   };
 
-        setMenuData(transformedData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+   fetchMenuData();
+ }, []);
 
-    fetchMenuData();
-  }, []);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => {
@@ -120,8 +125,8 @@ const Menu = () => {
     }
   };
 
-  if (loading) return <div>Loading menu...</div>;
-  if (error) return <div>Error loading menu: {error}</div>;
+if (loading) return <LoadingScreen />;
+ if (error) return <div>Error loading menu: {error}</div>;
   if (!menuData) return <div>No menu items available</div>;
 
   const menuSections = [

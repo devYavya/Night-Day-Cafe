@@ -6,25 +6,26 @@
     color: white;
     position: fixed;
     top: 0;
-    left: 0;
-    padding-top: 20px;
-    transition: transform 0.3s ease;
+    left: -250px;
+    /* Initially hidden */
+    padding-top: 40px;
     z-index: 1000;
-}
-
-.sidebar.hidden {
-    transform: translateX(-100%);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
 .sidebar.active {
-    transform: translateX(0);
+    left: 0;
+    /* Show the sidebar */
 }
 
 .sidebar-title {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
     font-weight: bold;
+    text-align: center;
+    color: #ecf0f1;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .sidebar-menu {
@@ -35,28 +36,37 @@
 
 .sidebar-menu li {
     padding: 15px 20px;
+    margin: 10px 0;
     transition: background 0.3s ease;
+    border-radius: 8px;
 }
 
 .sidebar-menu li:hover {
-    background-color: #1a252f;
+    background-color: #34495e;
 }
 
 .sidebar-menu li a {
+    color: #ecf0f1;
     text-decoration: none;
-    color: white;
     display: block;
-    font-size: 16px;
+    font-size: 1.2rem;
 }
+
+.sidebar-menu li a:hover {
+    color: #f39c12;
+    /* Hover color */
+}
+
+/* Hamburger Menu */
 .hamburger {
-    position: fixed;
-    top: 15px;
-    left: 15px;
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
     width: 30px;
     height: 25px;
     cursor: pointer;
     z-index: 1100;
-    display: none;
     flex-direction: column;
     justify-content: space-between;
 }
@@ -67,16 +77,32 @@
     border-radius: 2px;
     width: 100%;
 }
+
+/* Responsive Design for Smaller Screens */
 @media screen and (max-width: 768px) {
+    .sidebar {
+        left: -250px;
+        /* Hidden by default on small screens */
+    }
+
+    .sidebar.active {
+        left: 0;
+        /* Show the sidebar when active */
+    }
+
     .hamburger {
         display: flex;
     }
 
-    .sidebar {
-        transform: translateX(-100%);
+    .sidebar-menu li {
+        padding: 20px;
+        font-size: 1.4rem;
     }
 
-    .sidebar.active {
-        transform: translateX(0);
+    .sidebar-menu li a {
+        font-size: 1.4rem;
+    }
+    .sidebar-title {
+        font-size: 2rem;
     }
 }

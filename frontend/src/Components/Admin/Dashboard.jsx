@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiService } from "../../services/apiService";
 import "./Dashboard.css";
-import Sidenav from "./Sidenav";
+import Sidenav from "./Sidenav"; // Make sure this import is correct!
 
 function Dashboard() {
   const [stats, setStats] = useState({
