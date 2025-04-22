@@ -9,11 +9,11 @@ import "react-toastify/dist/ReactToastify.css"; // Import styles for Toastify
 const MenuManagement = () => {
   const [menuData, setMenuData] = useState([]);
   const [newItem, setNewItem] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    active: true,
+    Name: "",
+    Description: "",
+    Price: "",
+    Category: "",
+    Active: true,
   });
   const [editingItem, setEditingItem] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,9 @@ const MenuManagement = () => {
         const flattened = Array.isArray(data)
           ? data
           : Object.values(data).flat();
-        setMenuData(flattened);
+        // Map Id to _id for consistency with frontend usage
+        const mapped = flattened.map(item => ({ ...item, _id: item.Id }));
+        setMenuData(mapped);
         toast.success("Menu loaded successfully!"); // Success toast
       } catch (err) {
         console.error(err);
@@ -61,18 +63,19 @@ const MenuManagement = () => {
         );
         toast.success("Item updated successfully!"); // Success toast
       } else {
-        const newId = Date.now().toString();
-        await apiService.addMenuItem({ ...newItem, _id: newId });
-        setMenuData((prev) => [...prev, { ...newItem, _id: newId }]);
+        const createdItem = await apiService.addMenuItem(newItem);
+        // Map Id to _id for consistency
+        const itemWithId = { ...createdItem, _id: createdItem.Id };
+        setMenuData((prev) => [...prev, itemWithId]);
         toast.success("Item added successfully!"); // Success toast
       }
 
       setNewItem({
-        name: "",
-        description: "",
-        price: "",
-        category: "",
-        active: true,
+        Name: "",
+        Description: "",
+        Price: "",
+        Category: "",
+        Active: true,
       });
       setEditingItem(null);
       setShowForm(false);
@@ -94,13 +97,7 @@ const MenuManagement = () => {
   };
 
   const handleEdit = (item) => {
-    setNewItem({
-      name: item.Name,
-      description: item.Description,
-      price: item.Price,
-      category: item.Category, // Set category for editing
-      active: item.Active,
-    });
+    setNewItem(item);
     setEditingItem(item);
     setShowForm(true);
   };
@@ -110,12 +107,17 @@ const MenuManagement = () => {
 
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+      {/* Sidenav */}
       <div>
         <Sidenav />
       </div>
+
+      {/* Main Content */}
       <div style={{ flex: 1, overflowY: "auto" }}>
         <div className="admin-menu-page">
           <h1>Menu Management</h1>
+
+          {/* Show "Add New Item" button if form is not visible */}
           <div className="top-actions">
             {!showForm && (
               <button className="add-new-btn" onClick={() => setShowForm(true)}>
@@ -123,36 +125,44 @@ const MenuManagement = () => {
               </button>
             )}
           </div>
+
+          {/* Show form if 'showForm' state is true */}
           {showForm && (
             <form className="menu-form" onSubmit={handleAddItem}>
               <h2>{editingItem ? "Edit Item" : "Add New Item"}</h2>
+
+              {/* Item Name */}
               <div className="form-group">
                 <label htmlFor="name">Item Name</label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="Name"
                   value={newItem.Name}
                   onChange={handleChange}
                   required
                 />
               </div>
+
+              {/* Description */}
               <div className="form-group">
                 <label htmlFor="description">Description</label>
                 <textarea
                   id="description"
-                  name="description"
+                  name="Description"
                   value={newItem.Description || "No Description"}
                   onChange={handleChange}
                   required
                 />
               </div>
+
+              {/* Price */}
               <div className="form-group">
                 <label htmlFor="price">Price</label>
                 <input
                   type="number"
                   id="price"
-                  name="price"
+                  name="Price"
                   value={newItem.Price}
                   onChange={handleChange}
                   required
@@ -160,35 +170,17 @@ const MenuManagement = () => {
                 />
               </div>
 
-              {/* Category Dropdown */}
+              {/* Category */}
               <div className="form-group">
                 <label htmlFor="category">Category</label>
-                <select
+                <input
+                  type="text"
                   id="category"
-                  name="category"
+                  name="Category"
                   value={newItem.Category}
                   onChange={handleChange}
                   required
-                >
-                  <option value="">Select Category</option>
-                  <option value="Coffee">Coffee</option>
-                  <option value="Burgers">Burgers</option>
-                  <option value="Drinks">Drinks</option>
-                  <option value="Desserts">Desserts</option>
-                  <option value="Tea">Tea</option>
-                  <option value="Sandwiches">Sandwiches</option>
-                  <option value="Starters">Starters</option>
-                  <option value="Noodles">Noodles</option>
-                  <option value="Momos">Momos</option>
-                  <option value="Chaat">Chaat</option>
-                  <option value="Rice">Rice</option>
-                  <option value="Fries">Fries</option>
-                  <option value="Maggie">Maggie</option>
-                  <option value="Pizza">Pizza</option>
-                  <option value="Egg Course">Egg Course</option>
-                  <option value="Sizzlers">Sizzlers</option>
-                  <option value="Combos">Combos</option>
-                </select>
+                />
               </div>
 
               {/* Active Status */}
@@ -197,8 +189,8 @@ const MenuManagement = () => {
                 <input
                   type="checkbox"
                   id="active"
-                  name="active"
-                  checked={newItem.active}
+                  name="Active"
+                  checked={newItem.Active}
                   onChange={handleChange}
                 />
               </div>

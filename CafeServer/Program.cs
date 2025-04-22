@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("https://night-day-cafe-face.onrender.com","http://localhost:3000", "*")
+        policy.WithOrigins("https://night-day-cafe-face.onrender.com","http://localhost:3000")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials());
@@ -29,6 +29,7 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 
 builder.Services.AddSingleton<MenuRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AdminRepository>();
 builder.Services.AddScoped<BillingRepository>();
 builder.Services.AddScoped<InventoryRepository>();
 
@@ -50,6 +51,9 @@ using (var scope = app.Services.CreateScope())
 {
     var menuRepo = scope.ServiceProvider.GetRequiredService<MenuRepository>();
     await LoadMenuData(menuRepo);
+
+    var adminRepo = scope.ServiceProvider.GetRequiredService<AdminRepository>();
+    await DbInitializer.SeedAdmin(adminRepo);
 }
 
 app.Run();

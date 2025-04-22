@@ -1,20 +1,39 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiService } from "../../services/apiService";
 import "./Login.css";
 
 function Login({ onLogin }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState(1); // 1: enter email, 2: enter OTP
   const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "password") {
+    setError("");
+    setInfo("");
+    try {
+      const response = await apiService.requestOtp({ email });
+      setInfo(`OTP sent to your email. (For demo: OTP is ${response.otp})`);
+      setStep(2);
+    } catch (err) {
+      setError(err.response?.data || "Failed to request OTP.");
+    }
+  };
+
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setInfo("");
+    try {
+      const response = await apiService.loginWithOtp({ email, otp });
       onLogin(true);
       navigate("/admin/dashboard");
-    } else {
-      setError("Invalid credentials. Please try again.");
+    } catch (err) {
+      setError(err.response?.data || "Invalid OTP. Please try again.");
     }
   };
 
@@ -23,31 +42,41 @@ function Login({ onLogin }) {
       <div className="login-card">
         <h2 className="login-title">☕ Welcome to Café Admin</h2>
         {error && <div className="login-error">{error}</div>}
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="login-btn">
-            Sign In
-          </button>
-        </form>
+        {info && <div className="login-info">{info}</div>}
+        {step === 1 && (
+          <form onSubmit={handleEmailSubmit} className="login-form">
+            <div className="input-group">
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="login-btn">
+              Request OTP
+            </button>
+          </form>
+        )}
+        {step === 2 && (
+          <form onSubmit={handleOtpSubmit} className="login-form">
+            <div className="input-group">
+              <label htmlFor="otp">Enter OTP</label>
+              <input
+                id="otp"
+                type="text"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="login-btn">
+              Verify OTP
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );

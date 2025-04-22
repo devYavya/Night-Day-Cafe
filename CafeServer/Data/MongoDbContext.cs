@@ -18,5 +18,7 @@ namespace CafeServer.Data
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
         public IMongoCollection<MenuItem> MenuItems => _database.GetCollection<MenuItem>("MenuItems");
         public IMongoCollection<Order> Orders => _database.GetCollection<Order>("Orders");
+
+        public IMongoCollection<Admin> Admins => _database.GetCollection<Admin>("Admins");
     }
 }

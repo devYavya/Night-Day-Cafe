@@ -8,7 +8,7 @@ export default function UnderConstruction() {
     const navigate = useNavigate();
 
   const handleBackToHome = () => {
-    navigate("/"); // Navigate to the home route
+    navigate("/admin/dashboard"); 
   };
   return (
     <div className="Construction-container">

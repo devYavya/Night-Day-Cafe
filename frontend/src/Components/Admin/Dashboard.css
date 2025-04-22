@@ -1,60 +1,119 @@
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #1e293b;
+}
+
+.layout-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f0f4f8;
+    overflow: hidden;
+}
+
+.sidebar-container {
+    min-width: 240px;
+    background: #ffffff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .dashboard-content {
-    flex: 1;
-    padding: 40px;
+    flex-grow: 1;
+    padding: 2rem;
     overflow-y: auto;
-    background: #f9f9f9;
 }
-
 .dashboard-title {
-    font-size: 28px;
-    margin-bottom: 30px;
-    font-weight: 600;
-    color: #333;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
 }
-
 .dashboard-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
+    gap: 1.5rem;
+    margin: 2rem 0;
 }
 
 .card {
-    background: white;
+    background: #ffffff;
+    padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
-    padding: 25px;
-    transition: 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 .card-icon {
-    font-size: 30px;
-    color: #ff6f61;
-    margin-bottom: 12px;
+    font-size: 1.8rem;
+    color: #4f46e5;
+    margin-bottom: 0.6rem;
 }
 
-/* Hamburger Button */
-.hamburger-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    margin-bottom: 20px;
-    cursor: pointer;
+.card h3,
+.card h4 {
+    margin: 0.5rem 0;
+    font-weight: 500;
+    color: #111827;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .dashboard-content {
-        padding: 20px;
+.card p {
+    font-size: 1.2rem;
+    color: #4b5563;
+}
+
+/* Chart */
+.chart-section {
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.chart-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+    .sidebar-container {
+        position: absolute;
+        z-index: 100;
+        left: -240px;
+        top: 0;
+        height: 100%;
+        transition: left 0.3s ease;
     }
 
-    .hamburger-btn {
-        display: block;
-        color: #333;
+    .sidebar-container.open {
+        left: 0;
     }
 }

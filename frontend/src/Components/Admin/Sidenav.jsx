@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  FaTachometerAlt,
+  FaCreditCard,
+  FaUtensils,
+  FaUsers,
+  FaFileAlt,
+  FaCog,
+  FaSignOutAlt,
+  FaBars,
+} from "react-icons/fa";
 import "./AdminSidebar.css";
 
 function AdminSidebar() {
@@ -8,28 +18,46 @@ function AdminSidebar() {
   return (
     <>
       <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        <span></span>
-        <span></span>
-        <span></span>
+        <FaBars size={24} />
       </div>
 
       <div className={`sidebar ${isOpen ? "active" : "hidden"}`}>
         <h2 className="sidebar-title">Admin Panel</h2>
         <ul className="sidebar-menu">
           <li>
-            <Link to="/admin/dashboard">🏠 Dashboard</Link>
+            <Link to="/admin/dashboard">
+              <FaTachometerAlt /> Dashboard
+            </Link>
           </li>
           <li>
-            <Link to="/admin/billing">💳 Billing Management</Link>
+            <Link to="/admin/billing">
+              <FaCreditCard /> Billing Management
+            </Link>
           </li>
           <li>
-            <Link to="/admin/menu">🍽️ Menu Management</Link>
+            <Link to="/admin/menu">
+              <FaUtensils /> Menu Management
+            </Link>
           </li>
           <li>
-            <Link to="/admin/customers">👥 Customer Management</Link>
+            <Link to="/admin/customers">
+              <FaUsers /> CMS
+            </Link>
           </li>
           <li>
-            <Link to="/admin/logout">🚪 Logout</Link>
+            <Link to="/admin/reports">
+              <FaFileAlt /> Your Report
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/settings">
+              <FaCog /> Settings
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/logout">
+              <FaSignOutAlt /> Logout
+            </Link>
           </li>
         </ul>
       </div>

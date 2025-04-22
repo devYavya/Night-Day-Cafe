@@ -1,6 +1,6 @@
 import React from 'react';
 import './Homepage.css';
-import { useNavigate} from 'react-router'
+import {Link, useNavigate} from 'react-router'
 
 const Homepage = () => {
     const navigate = useNavigate();
@@ -17,9 +17,9 @@ const Homepage = () => {
           <button className="cta-button" onClick={handleClick}>
             View Menu
           </button>
-          {/* <button className="cta-button">
+          <button className="cta-button">
             <Link to={"/Admin/Login"}>Login</Link>
-          </button> */}
+          </button>
         </div>
       </header>
 

@@ -2,6 +2,8 @@ import axios from "axios";
 // import menuData from "../Components/Screens/menu-data.json";
 
 const API_BASE_URL = "https://night-day-cafe.onrender.com/api";
+// const API_BASE_URL = "http://localhost:5090/api";
+
 
 export const apiService = {
   // getMenuItems: async () => {
@@ -22,21 +24,30 @@ export const apiService = {
       throw error;
     }
   },
-  updateMenuItem: async (id, updatedItem) => {
+  updateMenuItem: async (_id, updatedItem) => {
     try {
-      const response = await axios.put(`${API_BASE_URL}/menu/${id}`, updatedItem);
+      const response = await axios.put(`${API_BASE_URL}/menu/${_id}`, updatedItem);
       return response.data;
     } catch (error) {
       console.error("Error updating menu item:", error);
       throw error;
     }
   },
-  deleteMenuItem: async (id) => {
+  deleteMenuItem: async (_id) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/menu/${id}`);
+      const response = await axios.delete(`${API_BASE_URL}/menu/${_id}`);
       return response.data;
     } catch (error) {
       console.error("Error deleting menu item:", error);
+      throw error;
+    }
+  },
+  addMenuItem: async (newItem) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/menu`, newItem);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding menu item:", error);
       throw error;
     }
   },
@@ -65,6 +76,26 @@ export const apiService = {
       return response.data;
     } catch (error) {
       console.error("Login error:", error);
+      throw error;
+    }
+  },
+
+  requestOtp: async (data) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/request-otp`, data);
+      return response.data;
+    } catch (error) {
+      console.error("Request OTP error:", error);
+      throw error;
+    }
+  },
+
+  loginWithOtp: async (data) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, data);
+      return response.data;
+    } catch (error) {
+      console.error("Login with OTP error:", error);
       throw error;
     }
   },

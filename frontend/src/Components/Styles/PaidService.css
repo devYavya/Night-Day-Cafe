@@ -1,0 +1,111 @@
+.paid-service-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.paid-service-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.8s ease;
+}
+
+.lock-icon {
+  color: #ff5252;
+  margin-bottom: 20px;
+}
+
+.headline {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.sub-message {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.contact-note {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.contact-footer {
+  font-size: 16px;
+  color: #333;
+}
+
+.contact-link {
+  font-weight: bold;
+  color: #0077ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #005ecc;
+}
+
+.paid-backbutton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.paid-backbutton:hover {
+  background-color: #005ecc;
+  transform: translateY(-2px);
+}
+
+.paid-backbutton:active {
+  transform: scale(0.98);
+  background-color: #004bb0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-pop {
+  animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
