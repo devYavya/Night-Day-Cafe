@@ -30,6 +30,7 @@ namespace CafeServer.Controllers
             if (admin == null)
             {
                 return Unauthorized("Protected page: only admin access allowed.");
+                
             }
             var otp = new Random().Next(100000, 999999).ToString();
             otpStore.AddOrUpdate(request.Email, otp, (key, oldValue) => otp);

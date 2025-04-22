@@ -1,32 +1,40 @@
-import React from 'react';
-import './Homepage.css';
-import {Link, useNavigate} from 'react-router'
+import React from "react";
+import "./Homepage.css";
+import { Link, useNavigate } from "react-router";
 
 const Homepage = () => {
-    const navigate = useNavigate();
-    const handleClick = () =>
-    {
-        navigate('/menu');
-    }
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/menu");
+  };
   return (
     <div className="homepage">
       <header className="hero">
         <div className="hero-content">
           <h1>Welcome to Café Night & Day</h1>
           <p>Experience the perfect blend of comfort and taste</p>
-          <button className="cta-button" onClick={handleClick}>
-            View Menu
-          </button>
-          <button className="cta-button">
-            <Link to={"/Admin/Login"}>Login</Link>
-          </button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <button className="cta-button" onClick={handleClick}>
+                View Menu
+              </button>
+              <button className="cta-button">
+                <Link
+                  to="/Admin/Login"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Login
+                </Link>
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
       <section className="features">
         <div className="feature-card">
           <i className="fas fa-coffee"></i>
-          <h2>Premium Coffee</h2>
+          <h2>Coffee</h2>
           <p>Sourced from the finest beans around the world</p>
         </div>
         <div className="feature-card">

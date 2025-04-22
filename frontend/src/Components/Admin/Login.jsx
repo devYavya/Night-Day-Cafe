@@ -17,10 +17,17 @@ function Login({ onLogin }) {
     setInfo("");
     try {
       const response = await apiService.requestOtp({ email });
-      setInfo(`OTP sent to your email. (For demo: OTP is ${response.otp})`);
+      setInfo(`OTP is ${response.otp}`);
       setStep(2);
     } catch (err) {
-      setError(err.response?.data || "Failed to request OTP.");
+      if (err.response?.status === 401) {
+        setError("Unauthorized access.");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      } else {
+        setError(err.response?.data || "Failed to request OTP.");
+      }
     }
   };
 
@@ -33,7 +40,12 @@ function Login({ onLogin }) {
       onLogin(true);
       navigate("/admin/dashboard");
     } catch (err) {
-      setError(err.response?.data || "Invalid OTP. Please try again.");
+      if (err.response?.status === 401) {
+        setError("Unauthorized access.");
+        window.location.href = "/";
+      } else {
+        setError(err.response?.data || "Invalid OTP. Please try again.");
+      }
     }
   };
 
