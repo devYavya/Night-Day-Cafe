@@ -6,7 +6,7 @@ import LoadingScreen from "./Loadingscreen";
 
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
-    <div className="menu-item">
+    <div className="menu-item fade-in">
       <div className="item-header">
         <h3>{item.name}</h3>
         <span className="price">₹{item.price}</span>
@@ -36,13 +36,16 @@ const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
 
 const Menu = () => {
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
   const [menuData, setMenuData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Coffee");
 
-  const sectionRefs = useRef({});
   const menuSections = [
     "Coffee",
     "Burgers",
@@ -63,11 +66,6 @@ const Menu = () => {
     "Combos",
   ];
 
-  menuSections.forEach((title) => {
-    sectionRefs.current[title] =
-      sectionRefs.current[title] || React.createRef();
-  });
-
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
@@ -78,33 +76,24 @@ const Menu = () => {
             name: item.Name,
             price: item.Price,
             description: item.Description,
-            category: category,
+            category,
             active: item.Active,
           }));
-        const transformedData = {
-          coffee: normalizeItems(data.coffee, "coffee"),
-          burgers: normalizeItems(data.burgers, "burgers"),
-          drinks: normalizeItems(data.drinks, "drinks"),
-          desserts: normalizeItems(data.desserts, "desserts"),
-          tea: normalizeItems(data.tea, "tea"),
-          sandwiches: normalizeItems(data.sandwiches, "sandwiches"),
-          starters: normalizeItems(data.starters, "starters"),
-          noodles: normalizeItems(data.noodles, "noodles"),
-          momos: normalizeItems(data.momos, "momos"),
-          chaat: normalizeItems(data.chaat, "chaat"),
-          rice: normalizeItems(data.rice, "rice"),
-          fries: normalizeItems(data.fries, "fries"),
-          maggie: normalizeItems(data.maggie, "maggie"),
-          pizza: normalizeItems(data.pizza, "pizza"),
-          eggcourse: normalizeItems(data.eggcourse, "eggcourse"),
-          sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
-          combos: normalizeItems(data.combos, "combos"),
-        };
+
+        const transformedData = {};
+        for (const section of menuSections) {
+          transformedData[section.toLowerCase().replace(" ", "")] =
+            normalizeItems(
+              data[section.toLowerCase().replace(" ", "")],
+              section
+            );
+        }
+
         setMenuData(transformedData);
-        setTimeout(() => setLoading(false), 3000);
+        setTimeout(() => setLoading(false), 1000);
       } catch (err) {
         setError(err.message);
-        setTimeout(() => setLoading(false), 3000);
+        setTimeout(() => setLoading(false), 1000);
       }
     };
 
@@ -112,12 +101,8 @@ const Menu = () => {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => {
-      setShowScrollButton(window.scrollY > 200);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleAddToCart = (item) => {
     setCart((prev) => {
@@ -134,27 +119,12 @@ const Menu = () => {
     });
   };
 
-  const scrollToCategory = (category) => {
-    sectionRefs.current[category]?.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleBackToHome = () => navigate("/");
   const handleCheckout = () => navigate("/CheckoutPage", { state: { cart } });
+  const handleBackToHome = () => navigate("/");
 
   if (loading) return <LoadingScreen />;
   if (error) return <div>Error: {error}</div>;
   if (!menuData) return <div>No data available</div>;
-
-  const formattedSections = menuSections.map((title) => ({
-    title,
-    items: menuData[title.toLowerCase().replace(" ", "")] || [],
-  }));
 
   return (
     <div className="menu-page">
@@ -167,8 +137,10 @@ const Menu = () => {
         {menuSections.map((title) => (
           <button
             key={title}
-            onClick={() => scrollToCategory(title)}
-            className="category-button"
+            onClick={() => setActiveCategory(title)}
+            className={`category-button ${
+              activeCategory === title ? "active" : ""
+            }`}
           >
             {title}
           </button>
@@ -188,22 +160,14 @@ const Menu = () => {
         )}
       </div>
 
-      {formattedSections.map((section) => (
+      <div className="menu-sections-wrapper">
         <MenuSection
-          key={section.title}
-          title={section.title}
-          items={section.items}
+          key={activeCategory}
+          title={activeCategory}
+          items={menuData[activeCategory.toLowerCase().replace(" ", "")] || []}
           onAddToCart={handleAddToCart}
-          sectionRef={sectionRefs.current[section.title]}
         />
-      ))}
-
-      {/* Scroll-to-top Button (Visible inside menu-page) */}
-      {showScrollButton && (
-        <button className="scroll-top-btn" onClick={scrollToTop}>
-          ↑ Top
-        </button>
-      )}
+      </div>
     </div>
   );
 };
