@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("https://night-day-cafe-face.onrender.com","http://localhost:3000", "*")
+        policy.WithOrigins("https://night-day-cafe-face.onrender.com","http://localhost:3000")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials());
@@ -51,6 +51,9 @@ using (var scope = app.Services.CreateScope())
 {
     var menuRepo = scope.ServiceProvider.GetRequiredService<MenuRepository>();
     await LoadMenuData(menuRepo);
+
+    var adminRepo = scope.ServiceProvider.GetRequiredService<AdminRepository>();
+    await DbInitializer.SeedAdmin(adminRepo);
 }
 
 app.Run();
