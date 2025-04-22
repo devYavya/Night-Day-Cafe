@@ -6,7 +6,7 @@ const Homepage = () => {
     const navigate = useNavigate();
     const handleClick = () =>
     {
-        navigate('/Menu');
+        navigate('/menu');
     }
   return (
     <div className="homepage">
