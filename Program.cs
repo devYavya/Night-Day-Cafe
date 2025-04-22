@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("https://night-day-cafe-face.onrender.com","http://localhost:3000")
+        policy.WithOrigins("https://night-day-cafe-face.onrender.com/","http://localhost:3000", "https://night-day-cafe.netlify.app/")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials());
