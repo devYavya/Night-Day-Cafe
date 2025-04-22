@@ -4,26 +4,6 @@ import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
 import LoadingScreen from "./Loadingscreen";
 
-const menuSections = [
-  "Coffee",
-  "Burgers",
-  "Drinks",
-  "Desserts",
-  "Tea",
-  "Sandwiches",
-  "Starters",
-  "Noodles",
-  "Momos",
-  "Chaat",
-  "Rice",
-  "Fries",
-  "Maggie",
-  "Pizza",
-  "Egg Course",
-  "Sizzlers",
-  "Combos",
-];
-
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
     <div className="menu-item">
@@ -61,14 +41,35 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const sectionRefs = useRef({});
+  const menuSections = [
+    "Coffee",
+    "Burgers",
+    "Drinks",
+    "Desserts",
+    "Tea",
+    "Sandwiches",
+    "Starters",
+    "Noodles",
+    "Momos",
+    "Chaat",
+    "Rice",
+    "Fries",
+    "Maggie",
+    "Pizza",
+    "Egg Course",
+    "Sizzlers",
+    "Combos",
+  ];
 
-  useEffect(() => {
-    menuSections.forEach((title) => {
-      sectionRefs.current[title] = React.createRef();
-    });
-  }, [menuSections]);
+  // Initialize refs only once (no need for useEffect)
+  const sectionRefs = useRef(
+    menuSections.reduce((acc, title) => {
+      acc[title] = React.createRef();
+      return acc;
+    }, {})
+  );
 
+  // Fetch and normalize menu data
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
@@ -113,7 +114,7 @@ const Menu = () => {
     };
 
     fetchMenuData();
-  }, [menuSections]);
+  }, []);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => {
