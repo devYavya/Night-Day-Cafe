@@ -4,6 +4,26 @@ import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
 import LoadingScreen from "./Loadingscreen";
 
+const menuSections = [
+  "Coffee",
+  "Burgers",
+  "Drinks",
+  "Desserts",
+  "Tea",
+  "Sandwiches",
+  "Starters",
+  "Noodles",
+  "Momos",
+  "Chaat",
+  "Rice",
+  "Fries",
+  "Maggie",
+  "Pizza",
+  "Egg Course",
+  "Sizzlers",
+  "Combos",
+];
+
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
     <div className="menu-item">
@@ -18,6 +38,7 @@ const MenuItem = memo(({ item, onAddToCart }) => {
     </div>
   );
 });
+
 const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
   <section className="menu-section" ref={sectionRef}>
     <h2>{title}</h2>
@@ -32,6 +53,7 @@ const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
     </div>
   </section>
 ));
+
 const Menu = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -41,34 +63,12 @@ const Menu = () => {
 
   const sectionRefs = useRef({});
 
-  const menuSections = [
-    "Coffee",
-    "Burgers",
-    "Drinks",
-    "Desserts",
-    "Tea",
-    "Sandwiches",
-    "Starters",
-    "Noodles",
-    "Momos",
-    "Chaat",
-    "Rice",
-    "Fries",
-    "Maggie",
-    "Pizza",
-    "Egg Course",
-    "Sizzlers",
-    "Combos",
-  ];
-
-  // Create refs on mount
   useEffect(() => {
     menuSections.forEach((title) => {
       sectionRefs.current[title] = React.createRef();
     });
   }, [menuSections]);
 
-  // Fetch and normalize data
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
