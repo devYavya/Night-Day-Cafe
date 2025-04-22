@@ -118,6 +118,7 @@ const Menu = () => {
     };
 
     fetchMenuData();
+    // menuSections is a constant and does not change, so it is safe to omit it from the dependency array
   }, []);
 
   const handleAddToCart = (item) => {
