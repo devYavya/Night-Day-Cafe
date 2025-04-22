@@ -90,10 +90,10 @@ const Menu = () => {
         }
 
         setMenuData(transformedData);
-        setTimeout(() => setLoading(false), 6000);
+        setTimeout(() => setLoading(false), 3000);
       } catch (err) {
         setError(err.message);
-        setTimeout(() => setLoading(false), 6000);
+        setTimeout(() => setLoading(false), 3000);
       }
     };
 
@@ -107,11 +107,11 @@ const Menu = () => {
   const handleAddToCart = (item) => {
     setCart((prev) => {
       const existing = prev.find(
-        (i) => i.name === item.name && i.category === item.category
+        (i) => i.Name === item.Name && i.Category === item.Category
       );
       return existing
         ? prev.map((i) =>
-            i.name === item.name && i.category === item.category
+            i.Name === item.Name && i.Category === item.Category
               ? { ...i, quantity: i.quantity + 1 }
               : i
           )
