@@ -1,7 +1,9 @@
 using CafeServer.Models;
 using CafeServer.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver; 
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
 
 namespace CafeServer.Controllers
 {
@@ -35,21 +37,21 @@ namespace CafeServer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Order order) 
+        public async Task<IActionResult> Post(Order order)
         {
-            await _billingRepository.CreateAsync(order); 
-            return CreatedAtAction(nameof(Get), new { id = order.Id }, order); // Updated to use order
+            await _billingRepository.CreateAsync(order);
+            return CreatedAtAction(nameof(Get), new { id = order.Id }, order);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, Order order) // Changed from Billing to Order
+        public async Task<IActionResult> Put(string id, Order order)
         {
             var existingBilling = await _billingRepository.GetAsync(id);
             if (existingBilling == null)
             {
                 return NotFound();
             }
-            await _billingRepository.UpdateAsync(id, order); // Updated to use order
+            await _billingRepository.UpdateAsync(id, order);
             return NoContent();
         }
 
@@ -64,6 +66,39 @@ namespace CafeServer.Controllers
             await _billingRepository.RemoveAsync(id);
             return NoContent();
         }
+        [HttpPut("update-status/{id}")]
+        public async Task<IActionResult> UpdateOrderStatus(string id, [FromBody] OrderStatusUpdateRequest request)
+        {
+            try
+            {
+                var order = await _billingRepository.GetAsync(id);
+                if (order == null)
+                {
+                    return NotFound();
+                }
+
+                OrderStatus newStatus;
+                if (!Enum.TryParse(request.Status.ToString(), out newStatus))
+                {
+                    return BadRequest(new { message = "Invalid status value" });
+                }
+
+                order.Status = newStatus;
+
+                await _billingRepository.UpdateAsync(id, order);
+                return Ok(order);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error updating order status", error = ex.Message });
+            }
+        }
+
+        public class OrderStatusUpdateRequest
+        {
+            public int Status { get; set; } 
+        }
+
 
         [HttpGet("dashboard-stats")]
         public async Task<IActionResult> GetDashboardStats()
@@ -71,14 +106,20 @@ namespace CafeServer.Controllers
             try
             {
                 var totalOrders = await _billingRepository.CountAsync();
-                var pendingOrders = await _billingRepository.CountAsync(Builders<Order>.Filter.Eq(b => b.Status, OrderStatus.Pending)); // Updated to use Order
+
+                var pendingOrders = await _billingRepository.CountAsync(
+                    Builders<Order>.Filter.Eq(b => b.Status, OrderStatus.Pending)
+                );
+
+                // Get Total Revenue (assuming this method exists in the repository)
                 var totalRevenue = await _billingRepository.GetTotalRevenueAsync();
-                var totalCustomers = 87;
+                var totalCustomers = await _billingRepository.CountAsync();
+
                 var stats = new
                 {
                     totalOrders,
                     pendingOrders,
-                    revenue = totalRevenue.ToString("C"),
+                    revenue = totalRevenue.ToString("C"), // Format revenue as currency
                     customers = totalCustomers
                 };
 

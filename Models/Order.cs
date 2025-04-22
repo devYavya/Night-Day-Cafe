@@ -34,8 +34,9 @@ namespace CafeServer.Models
 
     public enum OrderStatus
     {
-        Pending,    // Order placed
-        Preparing,  // Being prepared
-        Delivered   // Order delivered
+        Pending = 0,    
+        Completed = 1,  
+        Cancelled = 2 
     }
+
 }
