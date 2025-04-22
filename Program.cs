@@ -29,6 +29,7 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 
 builder.Services.AddSingleton<MenuRepository>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AdminRepository>();
 builder.Services.AddScoped<BillingRepository>();
 builder.Services.AddScoped<InventoryRepository>();
 
