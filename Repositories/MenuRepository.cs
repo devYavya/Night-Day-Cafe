@@ -38,5 +38,24 @@ namespace CafeServer.Repositories
         public async Task AddMultipleMenuItems(List<MenuItem> items) => await _menuItems.InsertManyAsync(items);
 
         public async Task<bool> HasData() => (await _menuItems.CountDocumentsAsync(item => true)) > 0;
+
+        public async Task UpdateMenuItem(string id, MenuItem updatedItem)
+        {
+            var filter = Builders<MenuItem>.Filter.Eq(item => item.Id, id);
+            var update = Builders<MenuItem>.Update
+                .Set(item => item.Name, updatedItem.Name)
+                .Set(item => item.Description, updatedItem.Description)
+                .Set(item => item.Price, updatedItem.Price)
+                .Set(item => item.Category, updatedItem.Category)
+                .Set(item => item.Active, updatedItem.Active);
+
+            await _menuItems.UpdateOneAsync(filter, update);
+        }
+
+        public async Task DeleteMenuItem(string id)
+        {
+            var filter = Builders<MenuItem>.Filter.Eq(item => item.Id, id);
+            await _menuItems.DeleteOneAsync(filter);
+        }
     }
 }
