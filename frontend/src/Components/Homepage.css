@@ -6,16 +6,6 @@
   overflow-y: scroll;
   height: 100vh;
   }
-
-  .homepage {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-  }
-  .homepage::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-  }
-
-
 .hero {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/cafe-chain-3-1.png');
   background-size: cover;

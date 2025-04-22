@@ -4,6 +4,7 @@ import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
 import LoadingScreen from "./Loadingscreen";
 
+// Menu Item Component
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
     <div className="menu-item">
@@ -19,6 +20,7 @@ const MenuItem = memo(({ item, onAddToCart }) => {
   );
 });
 
+// Menu Section Component
 const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
   <section className="menu-section" ref={sectionRef}>
     <h2>{title}</h2>
@@ -34,63 +36,89 @@ const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
   </section>
 ));
 
+// Main Menu Component
 const Menu = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
   const [menuData, setMenuData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const sectionRefs = useRef({});
 
- useEffect(() => {
-   const fetchMenuData = async () => {
-     try {
-       const data = await apiService.getMenuItems();
+  const menuSections = [
+    "Coffee",
+    "Burgers",
+    "Drinks",
+    "Desserts",
+    "Tea",
+    "Sandwiches",
+    "Starters",
+    "Noodles",
+    "Momos",
+    "Chaat",
+    "Rice",
+    "Fries",
+    "Maggie",
+    "Pizza",
+    "Egg Course",
+    "Sizzlers",
+    "Combos",
+  ];
 
-       const normalizeItems = (items, category) =>
-         (items || []).map((item) => ({
-           id: item.Id,
-           name: item.Name,
-           price: item.Price,
-           description: item.Description,
-           category: category,
-           active: item.Active,
-         }));
+  // Create refs on mount
+  useEffect(() => {
+    menuSections.forEach((title) => {
+      sectionRefs.current[title] = React.createRef();
+    });
+  }, []);
 
-       const transformedData = {
-         coffee: normalizeItems(data.coffee, "coffee"),
-         burgers: normalizeItems(data.burgers, "burgers"),
-         drinks: normalizeItems(data.drinks, "drinks"),
-         desserts: normalizeItems(data.desserts, "desserts"),
-         tea: normalizeItems(data.tea, "tea"),
-         sandwiches: normalizeItems(data.sandwiches, "sandwiches"),
-         starters: normalizeItems(data.starters, "starters"),
-         noodles: normalizeItems(data.noodles, "noodles"),
-         momos: normalizeItems(data.momos, "momos"),
-         chaat: normalizeItems(data.chaat, "chaat"),
-         rice: normalizeItems(data.rice, "rice"),
-         fries: normalizeItems(data.fries, "fries"),
-         maggie: normalizeItems(data.maggie, "maggie"),
-         pizza: normalizeItems(data.pizza, "pizza"),
-         eggcourse: normalizeItems(data.eggcourse, "eggcourse"),
-         sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
-         combos: normalizeItems(data.combos, "combos"),
-       };
-       setMenuData(transformedData);
-       setTimeout(() => {
-         setLoading(false);
-       }, 5000);
-     } catch (err) {
-       setError(err.message);
-       setTimeout(() => {
-         setLoading(false);
-       }, 5000);
-     }
-   };
+  // Fetch and normalize data
+  useEffect(() => {
+    const fetchMenuData = async () => {
+      try {
+        const data = await apiService.getMenuItems();
 
-   fetchMenuData();
- }, []);
+        const normalizeItems = (items, category) =>
+          (items || []).map((item) => ({
+            id: item.Id,
+            name: item.Name,
+            price: item.Price,
+            description: item.Description,
+            category: category,
+            active: item.Active,
+          }));
 
+        const transformedData = {
+          coffee: normalizeItems(data.coffee, "coffee"),
+          burgers: normalizeItems(data.burgers, "burgers"),
+          drinks: normalizeItems(data.drinks, "drinks"),
+          desserts: normalizeItems(data.desserts, "desserts"),
+          tea: normalizeItems(data.tea, "tea"),
+          sandwiches: normalizeItems(data.sandwiches, "sandwiches"),
+          starters: normalizeItems(data.starters, "starters"),
+          noodles: normalizeItems(data.noodles, "noodles"),
+          momos: normalizeItems(data.momos, "momos"),
+          chaat: normalizeItems(data.chaat, "chaat"),
+          rice: normalizeItems(data.rice, "rice"),
+          fries: normalizeItems(data.fries, "fries"),
+          maggie: normalizeItems(data.maggie, "maggie"),
+          pizza: normalizeItems(data.pizza, "pizza"),
+          eggcourse: normalizeItems(data.eggcourse, "eggcourse"),
+          sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
+          combos: normalizeItems(data.combos, "combos"),
+        };
+
+        setMenuData(transformedData);
+        setTimeout(() => setLoading(false), 5000);
+      } catch (err) {
+        setError(err.message);
+        setTimeout(() => setLoading(false), 5000);
+      }
+    };
+
+    fetchMenuData();
+  }, []);
 
   const handleAddToCart = (item) => {
     setCart((prevCart) => {
@@ -110,26 +138,21 @@ const Menu = () => {
     });
   };
 
-  const handleBackToHome = () => {
-    navigate("/");
-  };
-
-  const handleCheckout = () => {
-    navigate("/CheckoutPage", { state: { cart } });
-  };
+  const handleBackToHome = () => navigate("/");
+  const handleCheckout = () => navigate("/CheckoutPage", { state: { cart } });
 
   const scrollToCategory = (category) => {
     const sectionRef = sectionRefs.current[category];
-    if (sectionRef) {
-      sectionRef.scrollIntoView({ behavior: "smooth" });
+    if (sectionRef?.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-if (loading) return <LoadingScreen />;
- if (error) return <div>Error loading menu: {error}</div>;
+  if (loading) return <LoadingScreen />;
+  if (error) return <div>Error loading menu: {error}</div>;
   if (!menuData) return <div>No menu items available</div>;
 
-  const menuSections = [
+  const formattedSections = [
     { title: "Coffee", items: menuData.coffee },
     { title: "Burgers", items: menuData.burgers },
     { title: "Drinks", items: menuData.drinks },
@@ -157,13 +180,13 @@ if (loading) return <LoadingScreen />;
       <h1 className="menu-title">Our Menu</h1>
 
       <div className="category-navigation">
-        {menuSections.map((section) => (
+        {menuSections.map((title) => (
           <button
-            key={section.title}
-            onClick={() => scrollToCategory(section.title)}
+            key={title}
+            onClick={() => scrollToCategory(title)}
             className="category-button"
           >
-            {section.title}
+            {title}
           </button>
         ))}
       </div>
@@ -185,13 +208,13 @@ if (loading) return <LoadingScreen />;
         )}
       </div>
 
-      {menuSections.map((section) => (
+      {formattedSections.map((section) => (
         <MenuSection
           key={section.title}
           title={section.title}
           items={section.items || []}
           onAddToCart={handleAddToCart}
-          sectionRef={(el) => (sectionRefs.current[section.title] = el)}
+          sectionRef={sectionRefs.current[section.title]}
         />
       ))}
     </div>
