@@ -40,7 +40,9 @@ const Menu = () => {
   const [menuData, setMenuData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
+  const sectionRefs = useRef({});
   const menuSections = [
     "Coffee",
     "Burgers",
@@ -61,20 +63,15 @@ const Menu = () => {
     "Combos",
   ];
 
-  // Initialize refs only once (no need for useEffect)
-  const sectionRefs = useRef(
-    menuSections.reduce((acc, title) => {
-      acc[title] = React.createRef();
-      return acc;
-    }, {})
-  );
+  menuSections.forEach((title) => {
+    sectionRefs.current[title] =
+      sectionRefs.current[title] || React.createRef();
+  });
 
-  // Fetch and normalize menu data
   useEffect(() => {
     const fetchMenuData = async () => {
       try {
         const data = await apiService.getMenuItems();
-
         const normalizeItems = (items, category) =>
           (items || []).map((item) => ({
             id: item.Id,
@@ -84,7 +81,6 @@ const Menu = () => {
             category: category,
             active: item.Active,
           }));
-
         const transformedData = {
           coffee: normalizeItems(data.coffee, "coffee"),
           burgers: normalizeItems(data.burgers, "burgers"),
@@ -104,69 +100,61 @@ const Menu = () => {
           sizzlers: normalizeItems(data.sizzlers, "sizzlers"),
           combos: normalizeItems(data.combos, "combos"),
         };
-
         setMenuData(transformedData);
-        setTimeout(() => setLoading(false), 5000);
+        setTimeout(() => setLoading(false), 3000);
       } catch (err) {
         setError(err.message);
-        setTimeout(() => setLoading(false), 5000);
+        setTimeout(() => setLoading(false), 3000);
       }
     };
 
     fetchMenuData();
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setShowScrollButton(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const handleAddToCart = (item) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find(
-        (cartItem) =>
-          cartItem.name === item.name && cartItem.category === item.category
+    setCart((prev) => {
+      const existing = prev.find(
+        (i) => i.name === item.name && i.category === item.category
       );
-      if (existingItem) {
-        return prevCart.map((cartItem) =>
-          cartItem.name === item.name && cartItem.category === item.category
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
-      } else {
-        return [...prevCart, { ...item, quantity: 1 }];
-      }
+      return existing
+        ? prev.map((i) =>
+            i.name === item.name && i.category === item.category
+              ? { ...i, quantity: i.quantity + 1 }
+              : i
+          )
+        : [...prev, { ...item, quantity: 1 }];
     });
+  };
+
+  const scrollToCategory = (category) => {
+    sectionRefs.current[category]?.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackToHome = () => navigate("/");
   const handleCheckout = () => navigate("/CheckoutPage", { state: { cart } });
 
-  const scrollToCategory = (category) => {
-    const sectionRef = sectionRefs.current[category];
-    if (sectionRef?.current) {
-      sectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   if (loading) return <LoadingScreen />;
-  if (error) return <div>Error loading menu: {error}</div>;
-  if (!menuData) return <div>No menu items available</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!menuData) return <div>No data available</div>;
 
-  const formattedSections = [
-    { title: "Coffee", items: menuData.coffee },
-    { title: "Burgers", items: menuData.burgers },
-    { title: "Drinks", items: menuData.drinks },
-    { title: "Desserts", items: menuData.desserts },
-    { title: "Tea", items: menuData.tea },
-    { title: "Sandwiches", items: menuData.sandwiches },
-    { title: "Starters", items: menuData.starters },
-    { title: "Noodles", items: menuData.noodles },
-    { title: "Momos", items: menuData.momos },
-    { title: "Chaat", items: menuData.chaat },
-    { title: "Rice", items: menuData.rice },
-    { title: "Fries", items: menuData.fries },
-    { title: "Maggie", items: menuData.maggie },
-    { title: "Pizza", items: menuData.pizza },
-    { title: "Egg Course", items: menuData.eggcourse },
-    { title: "Sizzlers", items: menuData.sizzlers },
-    { title: "Combos", items: menuData.combos },
-  ];
+  const formattedSections = menuSections.map((title) => ({
+    title,
+    items: menuData[title.toLowerCase().replace(" ", "")] || [],
+  }));
 
   return (
     <div className="menu-page">
@@ -188,14 +176,10 @@ const Menu = () => {
       </div>
 
       <div className="cart-summary">
-        <h3>
-          Cart: {cart.reduce((total, item) => total + item.quantity, 0)} items
-        </h3>
+        <h3>Cart: {cart.reduce((t, i) => t + i.quantity, 0)} items</h3>
         <p>
           Total: ₹
-          {cart
-            .reduce((sum, item) => sum + item.price * item.quantity, 0)
-            .toFixed(2)}
+          {cart.reduce((s, i) => s + i.price * i.quantity, 0).toFixed(2)}
         </p>
         {cart.length > 0 && (
           <button className="checkout-button" onClick={handleCheckout}>
@@ -208,11 +192,18 @@ const Menu = () => {
         <MenuSection
           key={section.title}
           title={section.title}
-          items={section.items || []}
+          items={section.items}
           onAddToCart={handleAddToCart}
           sectionRef={sectionRefs.current[section.title]}
         />
       ))}
+
+      {/* Scroll-to-top Button (Visible inside menu-page) */}
+      {showScrollButton && (
+        <button className="scroll-top-btn" onClick={scrollToTop}>
+          ↑ Top
+        </button>
+      )}
     </div>
   );
 };
