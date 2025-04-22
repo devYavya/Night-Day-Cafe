@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 function OrderManagement() {
-  // This would be fetched from an API in a real application
   const [orders, setOrders] = useState([
     {
       id: 1,

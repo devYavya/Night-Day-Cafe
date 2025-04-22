@@ -1,63 +1,97 @@
-/* Login.css */
+/* Background style */
+.login-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe3b3, #ffb347, #ff6f61);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
 
-.login-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+/* Card */
+.login-card {
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 420px;
+    animation: fadeIn 0.6s ease;
+}
+
+/* Title */
+.login-title {
     text-align: center;
-}
-
-.login-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 26px;
     color: #333;
+    font-weight: 600;
 }
 
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.form-group {
+/* Error */
+.login-error {
+    color: #e74c3c;
+    text-align: center;
     margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.form-control {
-    width: 100%;
+    background-color: #ffe5e5;
     padding: 10px;
+    border-radius: 8px;
+}
+
+/* Form group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.input-group input {
+    padding: 12px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+    transition: 0.3s ease;
 }
 
-.form-control:focus {
-    border-color: #4a90e2;
+.input-group input:focus {
+    border-color: #ff6f61;
     outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 111, 97, 0.2);
 }
 
-.login-button {
+/* Button */
+.login-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #4a90e2;
+    background: #ff6f61;
     color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 12px;
     font-size: 16px;
-    transition: background 0.3s;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
-.login-button:hover {
-    background-color: #357abd;
+.login-btn:hover {
+    background-color: #e85a4f;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

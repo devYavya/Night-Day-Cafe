@@ -1,126 +1,258 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Admin Menu Page Container */
 .admin-menu-page {
-    max-width: 1000px;
-    margin: 2rem auto;
+    max-width: 1100px;
+    margin: 3rem auto;
     padding: 2rem;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-}
-
-/* Wrapper layout */
-.main-container {
-    display: flex;
-    height: 100vh;
-    overflow: auto;
-}
-
-/* Side Navigation */
-.sidenav-container {
-    width: 250px;
-    background-color: #f5f5f5;
-    /* Or match your sidenav background */
-    border-right: 1px solid #ccc;
-    padding: 1rem;
-}
-
-.content-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-    background-color: #fff;
-}
-
-.admin-menu-page {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.content-container h1,
-h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     color: #333;
+    transition: all 0.3s ease;
 }
 
-.toggle-form-btn {
-    display: block;
-    margin: 0 auto 2rem auto;
+.admin-menu-page h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Sidenav Styles */
+.sidenav {
+    width: 250px;
     background-color: #007bff;
-    color: white;
-    padding: 0.6rem 1.4rem;
-    border: none;
+    color: #ffffff;
+    padding: 1rem;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    transition: width 0.3s ease;
+}
+
+.sidenav .logo {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.sidenav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidenav ul li {
+    margin: 1rem 0;
+}
+
+.sidenav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    padding: 0.5rem;
     border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
     transition: background 0.3s ease;
 }
 
-.toggle-form-btn:hover {
+.sidenav ul li a:hover {
     background-color: #0056b3;
 }
 
+/* Top Actions Button */
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.add-new-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-new-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Form Styles */
+.menu-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.menu-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+/* Select dropdown specific styles */
+.form-group select {
+    background-color: #f9f9f9;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="none" d="M4 4l4 4 4-4"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 12px;
+    padding-right: 2rem;
+}
+
+.form-group select:focus {
+    border-color: #007bff;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Form button styles */
+.save-btn,
+.cancel-btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background-color: #dc3545;
+    color: white;
+    margin-left: 1rem;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Menu Item Styles */
 .menu-items {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
 }
 
 .menu-item {
-    background-color: #fff;
-    padding: 1rem;
+    background-color: #ffffff;
+    padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-item:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .item-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .item-header h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: #222;
+    font-size: 1.3rem;
+    color: #333;
 }
 
-.item-header .price {
+.price {
     font-weight: bold;
     color: #28a745;
 }
 
 .menu-item p {
-    margin: 0.5rem 0;
     color: #555;
+    font-size: 1rem;
 }
 
 .menu-item small {
-    display: block;
     color: #777;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
 .item-actions {
     display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
+    justify-content: space-between;
+    margin-top: 1rem;
 }
 
 .edit-btn,
 .delete-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .edit-btn {
@@ -130,6 +262,7 @@ h2 {
 
 .edit-btn:hover {
     background-color: #e0a800;
+    transform: translateY(-2px);
 }
 
 .delete-btn {
@@ -139,78 +272,14 @@ h2 {
 
 .delete-btn:hover {
     background-color: #c82333;
-}
-
-/* Form Container */
-.menu-form-wrapper {
-    display: none;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.menu-form-wrapper.show {
-    display: block;
-}
-
-.menu-form {
-    background-color: #ffffff;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
-}
-
-.menu-form .form-group {
-    margin-bottom: 1rem;
-}
-
-.menu-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.menu-form input[type="text"],
-.menu-form input[type="number"],
-.menu-form textarea {
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border 0.2s ease;
-}
-
-.menu-form input:focus,
-.menu-form textarea:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.menu-form input[type="checkbox"] {
-    transform: scale(1.2);
-    margin-right: 0.5rem;
-}
-
-.save-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-}
-
-.save-btn:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
 /* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.97);
+        transform: scale(0.95);
     }
 
     to {
@@ -219,14 +288,26 @@ h2 {
     }
 }
 
-@media (max-width: 600px) {
-
-    .menu-form,
-    .menu-item {
-        padding: 1rem;
-    }
-
+/* Responsive Design */
+@media (max-width: 768px) {
     .menu-items {
         grid-template-columns: 1fr;
+    }
+
+    .admin-menu-page {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 0.6rem;
+    }
+
+    .save-btn,
+    .cancel-btn {
+        width: 100%;
+        margin-top: 1rem;
     }
 }

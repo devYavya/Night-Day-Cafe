@@ -22,6 +22,24 @@ export const apiService = {
       throw error;
     }
   },
+  updateMenuItem: async (id, updatedItem) => {
+    try {
+      const response = await axios.put(`${API_BASE_URL}/menu/${id}`, updatedItem);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating menu item:", error);
+      throw error;
+    }
+  },
+  deleteMenuItem: async (id) => {
+    try {
+      const response = await axios.delete(`${API_BASE_URL}/menu/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting menu item:", error);
+      throw error;
+    }
+  },
   placeOrder: async (orderData) => {
     try {
       console.log("Sending to API:", orderData);
@@ -66,6 +84,18 @@ export const apiService = {
       return response.data;
     } catch (error) {
       console.error("Error fetching dashboard stats:", error);
+      throw error;
+    }
+  },
+  updateOrderStatus: async (orderId, newStatus) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/billing/update-status/${orderId}`,
+        { status: newStatus }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error updating order status:", error);
       throw error;
     }
   },

@@ -3,14 +3,17 @@ import "../Styles/LoadingScreen.css";
 
 const LoadingScreen = () => {
   return (
-    <div class="loading-screen">
-      <div class="teacup">
-        <div class="steam steam1"></div>
-        <div class="steam steam2"></div>
-        <div class="steam steam3"></div>
+    <div className="loading-screen-user">
+      <div className="coffee-cup">
+        <div className="coffee-cup-body">
+          <div className="steam steam1"></div>
+          <div className="steam steam2"></div>
+          <div className="steam steam3"></div>
+        </div>
+        <div className="coffee-handle"></div>
       </div>
-      <div class="loading-text">Loading menu...</div>
-      <div class="dots">
+      <div className="loading-text">Loading menu...</div>
+      <div className="dots">
         <span>.</span>
         <span>.</span>
         <span>.</span>

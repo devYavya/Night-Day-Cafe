@@ -90,10 +90,10 @@ const Menu = () => {
         }
 
         setMenuData(transformedData);
-        setTimeout(() => setLoading(false), 1000);
+        setTimeout(() => setLoading(false), 6000);
       } catch (err) {
         setError(err.message);
-        setTimeout(() => setLoading(false), 1000);
+        setTimeout(() => setLoading(false), 6000);
       }
     };
 

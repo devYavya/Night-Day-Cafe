@@ -1,35 +1,17 @@
-/* Container that wraps everything */
 .billing-management-container {
     display: flex;
     height: 100vh;
-    /* Ensures full screen height */
+    overflow: hidden;
 }
 
-/* Sidenav - fixed on the left */
-.sidenav {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    overflow-y: auto;
-}
-
-/* Billing content container, taking the remaining space */
 .billing-content-container {
     margin-left: 250px;
-    /* Width of the sidenav */
     flex: 1;
     padding: 20px;
     overflow-y: auto;
     background-color: #f9f9f9;
 }
 
-/* Billing management header */
 .billing-header {
     font-size: 1.8rem;
     font-weight: 600;
@@ -38,7 +20,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* The container for the order cards */
 .billing-container {
     display: flex;
     flex-wrap: wrap;
@@ -46,11 +27,9 @@
     justify-content: flex-start;
     overflow-y: auto;
     padding-right: 10px;
-    max-height: calc(100vh - 80px);
-    /* Adjust this based on your header size */
+    max-height: calc(100vh - 100px);
 }
 
-/* Card style for each order */
 .order-card {
     background-color: #fff;
     border-radius: 10px;
@@ -67,7 +46,6 @@
     transform: scale(1.05);
 }
 
-/* Title and details for the order card */
 .order-title {
     font-size: 1rem;
     font-weight: 500;
@@ -80,7 +58,6 @@
     color: #555;
 }
 
-/* List of items in the order */
 .order-items {
     margin-top: 0.5rem;
     padding-left: 1rem;
@@ -88,27 +65,109 @@
     color: #444;
 }
 
-/* Status badges for the order */
 .status-badge {
-    margin-top: 0.5rem;
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    text-transform: uppercase;
+    margin-top: 50px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    width: auto;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
-
 .status-0 {
-    background-color: #fff3cd;
-    color: #856404;
+    /* Pending status */
+    color: #fbbd08;
+    /* Yellow text color */
+    border-color: #fbbd08;
+    /* Yellow border */
 }
 
 .status-1 {
-    background-color: #d4edda;
-    color: #155724;
+    /* Completed status */
+    color: #28a745;
+    /* Green text color */
+    border-color: #28a745;
+    /* Green border */
 }
 
 .status-2 {
-    background-color: #f8d7da;
-    color: #721c24;
+    /* Cancelled status */
+    color: #dc3545;
+    /* Red text color */
+    border-color: #dc3545;
+    /* Red border */
+}
+
+/* Select dropdown styling */
+.status-badge select {
+    margin-left: 15px;
+    padding: 8px 18px;
+    margin-top: 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Box shadow change based on status */
+.status-0 select {
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.6);
+    /* Yellow box shadow for Pending */
+}
+
+.status-1 select {
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.6);
+    /* Green box shadow for Completed */
+}
+
+.status-2 select {
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.6);
+    /* Red box shadow for Cancelled */
+}
+
+/* Hover and Focus effect for select dropdown */
+.status-badge select:hover,
+.status-badge select:focus {
+    border-color: #007bff;
+    background-color: #f1f9ff;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Option styling */
+.status-badge select option {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+}
+
+/* Add subtle hover effect to option */
+.status-badge select option:hover {
+    background-color: #f1f9ff;
+    color: #007bff;
+}
+
+@media screen and (max-width: 768px) {
+    .billing-content-container {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .billing-container {
+        justify-content: center;
+    }
+
+    .order-card {
+        width: 100%;
+        max-width: 320px;
+    }
 }

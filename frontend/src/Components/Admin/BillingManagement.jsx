@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { apiService } from "../../services/apiService";
 import "../Styles/BillingManagement.css";
 import Sidenav from "./Sidenav";
+import LoadingScreen from "./LoadinDas";
 
 const BillingManagement = () => {
   const [orders, setOrders] = useState([]);
@@ -28,6 +29,21 @@ const BillingManagement = () => {
     };
   };
 
+  const updateOrderStatus = async (orderId, newStatus) => {
+    try {
+      const updatedOrder = await apiService.updateOrderStatus(
+        orderId,
+        newStatus
+      );
+      const updatedOrders = orders.map((order) =>
+        order.id === orderId ? { ...order, status: newStatus } : order
+      );
+      setOrders(updatedOrders);
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  };
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -44,7 +60,7 @@ const BillingManagement = () => {
     fetchOrders();
   }, []);
 
-  if (loading) return <div>Loading orders...</div>;
+  if (loading) return <LoadingScreen />;
 
   return (
     <div className="billing-management-container">
@@ -70,12 +86,19 @@ const BillingManagement = () => {
                 ))}
               </ul>
 
-              <div className={`status-badge status-${order.status}`}>
-                {order.status === 0
-                  ? "Pending"
-                  : order.status === 1
-                  ? "Completed"
-                  : "Cancelled"}
+              <div className="status-section">
+                <div className={`status-badge status-${order.status}`}>
+                  <select
+                    value={order.status}
+                    onChange={(e) =>
+                      updateOrderStatus(order.id, parseInt(e.target.value))
+                    }
+                  >
+                    <option value={0}>Pending</option>
+                    <option value={1}>Completed</option>
+                    <option value={2}>Cancelled</option>
+                  </select>
+                </div>
               </div>
             </div>
           ))}
