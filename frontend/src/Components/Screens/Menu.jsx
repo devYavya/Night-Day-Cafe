@@ -4,7 +4,6 @@ import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
 import LoadingScreen from "./Loadingscreen";
 
-// Menu Item Component
 const MenuItem = memo(({ item, onAddToCart }) => {
   return (
     <div className="menu-item">
@@ -19,8 +18,6 @@ const MenuItem = memo(({ item, onAddToCart }) => {
     </div>
   );
 });
-
-// Menu Section Component
 const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
   <section className="menu-section" ref={sectionRef}>
     <h2>{title}</h2>
@@ -35,8 +32,6 @@ const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
     </div>
   </section>
 ));
-
-// Main Menu Component
 const Menu = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -71,7 +66,7 @@ const Menu = () => {
     menuSections.forEach((title) => {
       sectionRefs.current[title] = React.createRef();
     });
-  }, []);
+  }, [menuSections]);
 
   // Fetch and normalize data
   useEffect(() => {
