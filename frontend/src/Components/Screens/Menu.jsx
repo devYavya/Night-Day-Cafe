@@ -8,10 +8,10 @@ const MenuItem = memo(({ item, onAddToCart }) => {
   return (
     <div className="menu-item fade-in">
       <div className="item-header">
-        <h3>{item.name}</h3>
-        <span className="price">₹{item.price}</span>
+        <h3>{item.Name}</h3>
+        <span className="price">₹{item.Price}</span>
       </div>
-      <p>{item.description || "No description available."}</p>
+      <p>{item.Description || "No description available."}</p>
       <button className="add-to-cart-btn" onClick={() => onAddToCart(item)}>
         Order Now
       </button>
