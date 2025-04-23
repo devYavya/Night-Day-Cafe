@@ -59,7 +59,7 @@
     text-align: right;
 }
 
-.checkout-page button {
+.confirm {
     display: block;
     width: 100%;
     padding: 14px;
@@ -74,13 +74,27 @@
     transition: background-color 0.3s ease;
 }
 
-.checkout-page button:hover {
+.confirm:hover {
     background-color: #e67e22;
 }
 
-.checkout-page button:disabled {
+.confirm:disabled {
     background-color: #bbb;
     cursor: not-allowed;
+}
+.back-button {
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    background: transparent;
+    color: #6d4c41;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: #3e2723;
 }
 
 /* Responsive Design */

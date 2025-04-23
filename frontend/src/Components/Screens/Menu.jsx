@@ -4,14 +4,14 @@ import "../Styles/Menu.css";
 import { apiService } from "../../services/apiService";
 import LoadingScreen from "./Loadingscreen";
 
-const MenuItem = memo(({ item, onAddToCart }) => {
+const MenuItem = memo(({ item, onAddToCart, index }) => {
   return (
-    <div className="menu-item fade-in">
+    <div className="menu-item" style={{ "--item-index": index }}>
       <div className="item-header">
-        <h3>{item.Name}</h3>
-        <span className="price">₹{item.Price}</span>
+        <h3>{item.name}</h3>
+        <span className="price">₹{item.price}</span>
       </div>
-      <p>{item.Description || "No description available."}</p>
+      <p>{item.description || "No description available."}</p>
       <button className="add-to-cart-btn" onClick={() => onAddToCart(item)}>
         Order Now
       </button>
@@ -28,6 +28,7 @@ const MenuSection = memo(({ title, items, onAddToCart, sectionRef }) => (
           key={`${title}-${index}`}
           item={item}
           onAddToCart={onAddToCart}
+          index={index}
         />
       ))}
     </div>
@@ -119,7 +120,7 @@ const Menu = () => {
     });
   };
 
-  const handleCheckout = () => navigate("/CheckoutPage", { state: { cart } });
+  const handleCheckout = () => navigate("/checkout", { state: { cart } });
   const handleBackToHome = () => navigate("/");
 
   if (loading) return <LoadingScreen />;

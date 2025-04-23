@@ -87,8 +87,13 @@ const CheckoutPage = () => {
     setLoading(false);
   }
 };
+  const handleBackToHome = () => navigate("/menu");
+
   return (
     <div className="checkout-page">
+      <button className="back-button" onClick={handleBackToHome}>
+        ← Back
+      </button>
       <h1>Checkout</h1>
       <form onSubmit={handleConfirmOrder}>
         <label htmlFor="name">
@@ -127,7 +132,7 @@ const CheckoutPage = () => {
           <strong>Total:</strong> ₹{totalAmount}
         </p>
 
-        <button type="submit" disabled={loading}>
+        <button className="confirm" type="submit" disabled={loading}>
           {loading ? "Placing Order..." : "Confirm Order"}
         </button>
       </form>
